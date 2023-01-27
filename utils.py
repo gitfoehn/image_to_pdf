@@ -69,7 +69,7 @@ def findLargestCountours(cntList: list, cntWidths: list) -> tuple[list, list]:
 
     return newCntList, newCntWidths
 
-def approx_contour(image: np.ndarray, scaleFactor: float) -> np.ndarray:
+def rotate_and_cut(image: np.ndarray, scaleFactor: float) -> np.ndarray:
     # resizes image for performance purposes 
     # rotates image and crops "page" out of it.
 
@@ -106,9 +106,19 @@ def approx_contour(image: np.ndarray, scaleFactor: float) -> np.ndarray:
 
 
 def image_to_pdf(image: np.ndarray, name:str)-> None:
-    # Konverts and safes an PNG image as PDF
+    # Converts and safes an PNG image as PDF
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     pil_image = Image.fromarray(image)
     pil_image.save(f"{name}.pdf", "PDF")
    
-   
+
+def whitening_background(img: np.ndarray) -> np.ndarray:
+    # Converts yelloish background into white background
+
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    value = hsv[:,:,2]
+    _, thresholded = cv2.threshold(value, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    return cv2.cvtColor(thresholded, cv2.COLOR_HSV2BGR)
+
+
+    

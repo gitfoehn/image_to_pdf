@@ -1,14 +1,16 @@
 import sys
 from constants import EXAMPLE_PICTURE, SCALE_FACTOR
-from utils import approx_contour, image_to_pdf
+from utils import rotate_and_cut, image_to_pdf, whitening_background
 import cv2
+
 
 pdf_name = "test"
 
 def main():
     # Read image
     image = cv2.imread(EXAMPLE_PICTURE)
-    transformed = approx_contour(image, SCALE_FACTOR)
+    transformed = rotate_and_cut(image, SCALE_FACTOR)
+    transformed = whitening_background(transformed)
     
     # show the original and transformd images
     #cv2.imshow("Original", image)
