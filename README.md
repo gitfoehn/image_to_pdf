@@ -1,5 +1,3 @@
-# Scanning-image-with-python
+# image_to_pdf converter
 
-Using python to build document scanner 
-
-I actually used image to scan library implementation  to find the largest edges in the image it helps alot and i really want to thank them.
+Converts an image and creates a pdf from it. Based on the [Scanning image with python project by EmanDiab](https://github.com/EmanDiab/Scanning-image-with-python)
